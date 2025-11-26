@@ -8,10 +8,11 @@ export function Shop(){
         async function fetchProducts(){
             const prodArr = [];
             for(let i = 1; i <= 20; i++){
-                fetch('https://fakestoreapi.com/products/${i}')
+                fetch(`https://fakestoreapi.com/products/${i}`)
                 .then(response => response.json())
                 .then(data => prodArr.push(data));
             }
+            setProducts(prodArr);
         }
-    })
+    },[])
 }
