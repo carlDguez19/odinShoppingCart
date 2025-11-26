@@ -12,7 +12,9 @@ export function Shop(){
                 .then(response => response.json())
                 .then(data => prodArr.push(data));
             }
-            setProducts(prodArr);
+            const results = await Promise.all(prodArr);
+            setProducts(results);
         }
+        fetchProducts();
     },[])
 }
