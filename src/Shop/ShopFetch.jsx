@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 export function Shop(){
-    return <h1>Were gonna go..... SHOPPING!!!</h1>
 
     const [products, setProducts] = useState([]);
 
@@ -10,7 +9,7 @@ export function Shop(){
             const prodArr = [];
             const res = await fetch('https://fakestoreapi.com/products');
             const data = await res.json();
-            console.log(data);
+            setProducts(data);
             }catch(err){
                 console.error("error getting products: ", err);
             }
@@ -18,6 +17,7 @@ export function Shop(){
         fetchProducts();
     },[]);
     
+    return <h1>Were gonna go..... SHOPPING!!!</h1>
     
     // useEffect(() => {
     //     async function fetchProducts(){
