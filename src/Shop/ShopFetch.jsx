@@ -30,15 +30,15 @@ export function Shop(){
     },[]);
 
     if(loading){
-        <h2>products loading... please wait</h2>;
+        return <h2>products loading... please wait</h2>;
     }
     if(error){
-        <h2>Error fetching products: {error}</h2>;
+        return <h2>Error fetching products: {error}</h2>;
     }
     
     function addToCartClick(id, quant){
-        setProducts(
-            products.map(prod => {
+        setProducts(prev =>
+            prev.map(prod => {
                 prod.id == id ? {...prod, inCart: true, quantity: quant} : prod
             })
         )
