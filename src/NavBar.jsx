@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css"
 
-export function Nav(){
+export function Nav({totItems}){
     return (
         <nav>
             <ul className={styles.navi}>
@@ -11,8 +11,9 @@ export function Nav(){
                 <li>
                     <Link to="shop"><h2>Shop</h2></Link>
                 </li>
-                <li>
+                <li className={styles.cartNav}>
                     <Link to="cart"><h2>Cart</h2></Link>
+                    <div>{totItems}</div>
                 </li>
             </ul>
         </nav>

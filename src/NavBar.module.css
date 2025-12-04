@@ -4,3 +4,13 @@
     justify-content: space-around;
     align-items: center;
 }
+
+.cartNav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cartNav h2{
+    margin-right: 15px;
+}
