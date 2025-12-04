@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { CardGrid } from "./CardGrid";
 export function Shop(){
 
     const [products, setProducts] = useState([]);
@@ -27,6 +28,7 @@ export function Shop(){
             }
         }
         fetchProducts();
+        console.log("here urs damn products ",products);
     },[]);
 
     if(loading){
@@ -44,7 +46,11 @@ export function Shop(){
         )
     }
 
-    return <h1>Were gonna go..... SHOPPING!!!</h1>
+    return(
+        <div className="shop">
+            <CardGrid products={products} addToCartClick={addToCartClick}/>
+        </div>
+    )
     //ill call the cardGrid here and pass the products as a prop 
     // which in turn, it(cardGrid) will use to generate each itemCard
     
