@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { CardGrid } from "./CardGrid";
 export function Shop(){
-
+    const [totItems, setTotItems] = useState(0);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -42,6 +42,11 @@ export function Shop(){
         setProducts(prev =>
             prev.map(prod => {
                 prod.id == id ? {...prod, inCart: true, quantity: quant} : prod
+            })
+        )
+        setTotItems(prev =>
+            prev.map(prod => {
+                prod.id == id ? prev + prod.quantity : prev
             })
         )
     }
