@@ -4,7 +4,6 @@ import { CardGrid } from "./CardGrid";
 
 export function Shop(){
     const {setTotItems, products, setProducts} = useOutletContext();
-    //const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
