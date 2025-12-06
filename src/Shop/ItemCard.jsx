@@ -8,7 +8,7 @@ export function ItemCard({prod, addToCart}){
         setCounter(prev => prev + 1);
     }
     function decItem(){
-        setCounter(prev => prev > 1 ? prev - 1 : prev);
+        setCounter(prev => prev > 0 ? prev - 1 : prev);
     }
 
     return(

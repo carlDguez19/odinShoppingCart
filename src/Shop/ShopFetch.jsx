@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 import { CardGrid } from "./CardGrid";
 
 export function Shop(){
-    const {setTotItems} = useOutletContext();
-    const [products, setProducts] = useState([]);
+    const {setTotItems, products, setProducts} = useOutletContext();
+    //const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -41,12 +41,17 @@ export function Shop(){
     }
     
     function addToCartClick(id, quant){
-        setProducts(prev =>
-            prev.map(prod =>
+        setProducts(prev => {
+            const updated = prev.map(prod =>
                 prod.id == id ? {...prod, inCart: true, quantity: quant} : prod
             )
-        )
-        setTotItems(prev => prev + quant)
+
+            const total = updated.reduce(
+                (acc, prod) => acc + (prod.inCart ? prod.quantity : 0), 0
+            );
+            setTotItems(total);
+            return updated;
+        });
     }
 
     return(
