@@ -2,11 +2,15 @@ import { useState } from "react";
 
 export function CartItem({prod, removeFromCart}){
 
+    const {counter, setCounter} = useState(prod.quant);
+
     function incItem(){
         setCounter(prev => prev + 1);
+        //add code here to alter the quant value of prod and update
     }
     function decItem(){
-        setCounter(prev => prev > 0 ? prev - 1 : prev);
+        setCounter(prev => prev > 1 ? prev - 1 : prev);
+        //add code here to alter the quant value of prod and update
     }
 
     return(

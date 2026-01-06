@@ -10,6 +10,13 @@ export function Cart(){
         })
     }
 
+    function incItem(){
+        setCounter(prev => prev + 1);
+    }
+    function decItem(){
+        setCounter(prev => prev > 0 ? prev - 1 : prev);
+    }
+
     return (
         <div className="cartPage">
             {products.filter(prod => prod.inCart)
