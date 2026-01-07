@@ -6,10 +6,12 @@ export function Cart(){
     const {setTotItems, products, setProducts} = useOutletContext();
     console.log(products);
     function removeFromCart(id){
+        let remItemQuantity = 0;
         setProducts(prev => {
-            const newProdArr = prev.map(prod => prod.id === id ? {...prod, inCart: false, quantity: 0} : prod)
+            const newProdArr = prev.map(prod => prod.id === id ? (remItemQuantity = prod.quantity && {...prod, inCart: false, quantity: 0}) : prod)
             return newProdArr;
         })
+        setTotItems(prev => prev - remItemQuantity);
     }
 
     return (
