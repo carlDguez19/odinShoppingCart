@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./ItemCard.module.css"
 export function ItemCard({prod, addToCart}){
     //add on click for addtocart
-    const [counter, setCounter] = useState(1);
+    const [counter, setCounter] = useState(prod.quantity);
     
     function incItem(){
         setCounter(prev => prev + 1);
@@ -20,7 +20,7 @@ export function ItemCard({prod, addToCart}){
             <p className={styles.desc}>{prod.description}</p>
             <h3>{prod.price}</h3>
             <div className={styles.cartInput}>
-                <button className="addToCart" onClick={() => addToCart(prod.id, counter)}> {prod.inCart ? "Update Cart" : "Add to Cart"}</button>
+                <button className="addToCart" disabled={counter === 0} onClick={() => addToCart(prod.id, counter)}> {prod.inCart ? "Update Cart" : "Add to Cart"}</button>
                 <div className={styles.incrementer}>
                     <button className="decrement" onClick={decItem}>-</button>
                     <p>{counter}</p>

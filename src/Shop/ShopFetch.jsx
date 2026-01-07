@@ -8,6 +8,7 @@ export function Shop(){
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        console.log("here urs products ",products);
         async function fetchProducts(){
             try{
                 setLoading(true);
@@ -16,12 +17,14 @@ export function Shop(){
                     throw new Error(`HTTP error. status: ${res.status}`);
                 }
                 const data = await res.json();
-                const enrichedData = data.map(item => ({
-                    ...item,
-                    inCart: false,
-                    quantity: 0,
-                }))
-                setProducts(enrichedData);
+                setProducts(prev => {
+                    if(prev.length > 0) return prev;
+                    return data.map(item => ({
+                        ...item,
+                        inCart: false,
+                        quantity: 0,
+                    }));
+                });
             }catch(err){
                 setError(err.message);
             }finally{
@@ -29,7 +32,6 @@ export function Shop(){
             }
         }
         fetchProducts();
-        console.log("here urs damn products ",products);
     },[]);
 
     if(loading){
@@ -58,23 +60,4 @@ export function Shop(){
             <CardGrid products={products} addToCartClick={addToCartClick}/>
         </div>
     )
-    //ill call the cardGrid here and pass the products as a prop 
-    // which in turn, it(cardGrid) will use to generate each itemCard
-    
-    // useEffect(() => {
-    //     async function fetchProducts(){
-    //         try{
-    //             const prodArr = [];
-    //             for(let i = 1; i <= 20; i++){
-    //                 prodArr.push(fetch(`https://fakestoreapi.com/products/${i}`).then(response => response.json()));
-    //             }
-            
-    //             const results = await Promise.all(prodArr);
-    //             setProducts(results);
-    //         }catch(err){
-    //             console.log("error fetching products: ", err);
-    //         }
-    //     }
-    //     fetchProducts();
-    // },[])
 }
