@@ -24,7 +24,7 @@ export function CartItem({prod, removeFromCart}){
                 item.id === prod.id ? {...item, quantity: item.quantity-1} : item
             )
         );
-        setTotItems(prev => prev -1);
+        setTotItems(prev => prev > 1 ? prev - 1 : prev);
     }
 
     return(
