@@ -1,11 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { routes } from "../routes";
+import { routes } from "../routes.jsx";
 import userEvent from "@testing-library/user-event";
-import { beforeEach } from "vitest";
+import { beforeEach, vi } from "vitest";
+import { App } from "../App.jsx"
+import { ErrorPage } from "../ErrorPage.jsx"
+import { Home } from "../Home/Home.jsx"
+import { Shop } from "../Shop/ShopFetch.jsx"
+import { Cart } from "../Cart/Cart.jsx"
 
 beforeEach(() => {
-    global.fetch = jest.fn(() => 
+    global.fetch = vi.fn(() => 
     Promise.resolve({
         ok: true,
         json: () =>
@@ -38,7 +43,20 @@ test("renders the home page by default", () =>{
 });
 
 test("testing shop link works when clicked", async () => {
-    const router = createMemoryRouter(routes, {initialEntries: ["/"],});
+    const router = createMemoryRouter([
+            {
+                path: "/",
+                element: <App/>,
+                errorElement: <ErrorPage/>,
+                children: [
+                    {index: true, element: <Home/>},
+                    {path: "shop", element: <Shop/>},
+                    {path: "cart", element: <Cart/>},
+                ]
+            }
+        ],
+        {initialEntries: ["/"]}
+    );
 
     render(<RouterProvider router={router}/>);
 
@@ -49,4 +67,4 @@ test("testing shop link works when clicked", async () => {
 
     const loadingMessage = await screen.findByText(/products loading... please wait/i);
     expect(loadingMessage).toBeInTheDocument();
-})
+});
