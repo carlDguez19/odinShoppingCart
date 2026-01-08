@@ -12,8 +12,8 @@ export function Nav({totItems}){
                     <Link to="/shop"><h2>Shop</h2></Link>
                 </li>
                 <li className={styles.cartNav}>
-                    <Link to="/cart"><h2>Cart</h2></Link>
-                    <div>{totItems}</div>
+                    <Link to="/cart"><h2>Cart {totItems}</h2></Link>
+                    {/* <div>{totItems}</div> */}
                 </li>
             </ul>
         </nav>

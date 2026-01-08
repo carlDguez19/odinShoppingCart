@@ -20,7 +20,7 @@ export function Cart(){
     }
 
     return (
-        <div className={styles.cartPage}>
+        <div className={styles.cartPage} data-testid="cartPageDiv">
             {products.filter(prod => prod.inCart)
             .map(prod => (
                 <CartItem key={prod.id} prod={prod} removeFromCart={removeFromCart}/>

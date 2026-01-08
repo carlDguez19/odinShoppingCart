@@ -72,17 +72,42 @@ test("testing shop link works when clicked", async () => {
     expect(products.length).toBeGreaterThan(0);
 });
 
-// vi.mock("react-router", () => ({
-//     ...vi.importActual("react-router"),
-//     useOutletContext: () => ({
-//         products: [],
-//         setproducts: vi.fn(),
-//         setTotItems: vi.fn(),
-//     }),
-// }));
+test("testing cart ling works when clicked", async () => {
+    const router = createMemoryRouter(testRoutes, {initialEntries: ["/"]});
 
-// test("renders shop directly with mocked context", async () => {
-//     render(<Shop/>);
-//     const loadingMessage = await screen.findByText(/products loading... please wait/i);
-//     expect(loadingMessage).toBeInTheDocument();
-// })
+    render(
+        <RouterProvider router = {router}/>
+    )
+
+    const user = userEvent.setup();
+
+    const cartLink = screen.getByRole("link", {name: /cart/i});
+    await user.click(cartLink);
+
+    const cartClass = await screen.getByTestId("cartPageDiv")
+    expect(cartClass).toBeInTheDocument();
+})
+
+test("select quantity add to cart and check total in nav", async () => {
+    const router = createMemoryRouter(testRoutes, {initialEntries: ["/"]});
+
+    render(
+        <RouterProvider router={router}/>
+    )
+
+    const user = userEvent.setup();
+
+    const shopLink = screen.getByRole("link", {name: /shop/i});
+    await user.click(shopLink);
+
+    const plusButtons = screen.getAllByRole("button", {name: "+"});
+    await user.click(plusButtons[0]);//quantity becomes 1
+
+    const addToCartButons = screen.getAllByRole("button", {name: /add to cart/i});
+    await user.click(addToCartButons[0]);
+
+    const cartCount = screen.findByText(/cart\s*1/i);
+    expect(cartCount).toBeInTheDocument();
+
+    screen.debug();
+})
