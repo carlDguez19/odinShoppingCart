@@ -9,10 +9,10 @@ export function Nav({totItems}){
                     <Link to="/"><h2>Home</h2></Link>
                 </li>
                 <li>
-                    <Link to="shop"><h2>Shop</h2></Link>
+                    <Link to="/shop"><h2>Shop</h2></Link>
                 </li>
                 <li className={styles.cartNav}>
-                    <Link to="cart"><h2>Cart</h2></Link>
+                    <Link to="/cart"><h2>Cart</h2></Link>
                     <div>{totItems}</div>
                 </li>
             </ul>

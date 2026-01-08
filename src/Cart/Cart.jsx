@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router";
+import { useOutletContext } from "react-router-dom";
 import { CartItem } from "./CartItem";
 import styles from "./Cart.module.css"
 

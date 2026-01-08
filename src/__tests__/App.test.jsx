@@ -9,6 +9,9 @@ import { Home } from "../Home/Home.jsx"
 import { Shop } from "../Shop/ShopFetch.jsx"
 import { Cart } from "../Cart/Cart.jsx"
 
+import { useOutletContext } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+
 beforeEach(() => {
     global.fetch = vi.fn(() => 
     Promise.resolve({
@@ -65,6 +68,21 @@ test("testing shop link works when clicked", async () => {
     const shopLink = screen.getByRole("link", {name: /shop/i});
     await user.click(shopLink);
 
-    const loadingMessage = await screen.findByText(/products loading... please wait/i);
-    expect(loadingMessage).toBeInTheDocument();
+    const products = await screen.findAllByText(/test product/i);
+    expect(products.length).toBeGreaterThan(0);
 });
+
+// vi.mock("react-router", () => ({
+//     ...vi.importActual("react-router"),
+//     useOutletContext: () => ({
+//         products: [],
+//         setproducts: vi.fn(),
+//         setTotItems: vi.fn(),
+//     }),
+// }));
+
+// test("renders shop directly with mocked context", async () => {
+//     render(<Shop/>);
+//     const loadingMessage = await screen.findByText(/products loading... please wait/i);
+//     expect(loadingMessage).toBeInTheDocument();
+// })
