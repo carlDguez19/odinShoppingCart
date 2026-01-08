@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import { routes } from "../routes.jsx";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, vi } from "vitest";
+
 import { App } from "../App.jsx"
 import { ErrorPage } from "../ErrorPage.jsx"
 import { Home } from "../Home/Home.jsx"
@@ -28,8 +28,21 @@ beforeEach(() => {
     );
 });
 
+const testRoutes = [
+    {
+        path: "/",
+        element: <App/>,
+        errorElement: <ErrorPage/>,
+        children: [
+            {index: true, element: <Home/>},
+            {path: "shop", element: <Shop/>},
+            {path: "cart", element: <Cart/>},
+        ]
+    }
+]
+
 test("renders the home page by default", () =>{
-    const router = createMemoryRouter(routes, {initialEntries: ["/"],});
+    const router = createMemoryRouter(testRoutes, {initialEntries: ["/"],});
     
     render(
         <RouterProvider router={router} />
@@ -43,20 +56,7 @@ test("renders the home page by default", () =>{
 });
 
 test("testing shop link works when clicked", async () => {
-    const router = createMemoryRouter([
-            {
-                path: "/",
-                element: <App/>,
-                errorElement: <ErrorPage/>,
-                children: [
-                    {index: true, element: <Home/>},
-                    {path: "shop", element: <Shop/>},
-                    {path: "cart", element: <Cart/>},
-                ]
-            }
-        ],
-        {initialEntries: ["/"]}
-    );
+    const router = createMemoryRouter(testRoutes, {initialEntries: ["/"]});
 
     render(<RouterProvider router={router}/>);
 
