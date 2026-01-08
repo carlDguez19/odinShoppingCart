@@ -8,17 +8,16 @@ export function Shop(){
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        console.log("here urs products ",products);
         async function fetchProducts(){
             try{
                 setLoading(true);
-                const res = await fetch('https://fakestoreapi.com/products');
+                const res = await fetch('https://fakestoreapi.com/products');//fetch from api first
                 if(!res.ok){
                     throw new Error(`HTTP error. status: ${res.status}`);
                 }
                 const data = await res.json();
                 setProducts(prev => {
-                    if(prev.length > 0) return prev;
+                    if(prev.length > 0) return prev;//add extra info to each item
                     return data.map(item => ({
                         ...item,
                         inCart: false,
@@ -42,12 +41,12 @@ export function Shop(){
     }
     
     function addToCartClick(id, quant){
-        setProducts(prev => {
-            const updated = prev.map(prod =>
+        setProducts(prev => {//get previous products
+            const updated = prev.map(prod =>//go through each one change its quantity and inCart value
                 prod.id == id ? {...prod, inCart: true, quantity: quant} : prod
             )
 
-            const total = updated.reduce(
+            const total = updated.reduce(//change total items amount
                 (acc, prod) => acc + (prod.inCart ? prod.quantity : 0), 0
             );
             setTotItems(total);

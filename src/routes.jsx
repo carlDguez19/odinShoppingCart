@@ -10,7 +10,7 @@ export const routes = [
         element: <App/>,
         errorElement: <ErrorPage/>,
         children: [
-            {index: true, element: <Home/>},
+            {index: true, element: <Home/>}, //default page loaded as soon as user visits our page
             {path: "shop", element: <Shop/>},
             {path: "cart", element: <Cart/>},
         ]

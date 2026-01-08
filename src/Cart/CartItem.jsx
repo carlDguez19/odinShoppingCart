@@ -8,7 +8,7 @@ export function CartItem({prod, removeFromCart}){
 
     function incItem(){
         setCounter(prev => prev + 1);
-        //add code here to alter the quant value of prod and update
+        //alter the quant value of prod and update
         setProducts(prev =>
             prev.map(item =>
                 item.id === prod.id ? ({...item, quantity: item.quantity+1}): item
@@ -18,7 +18,7 @@ export function CartItem({prod, removeFromCart}){
     }
     function decItem(){
         setCounter(prev => prev > 1 ? prev - 1 : prev);
-        //add code here to alter the quant value of prod and update
+        //alter the quant value of prod and update
         setProducts(prev =>
             prev.map(item =>
                 item.id === prod.id ? {...item, quantity: item.quantity-1} : item

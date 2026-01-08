@@ -9,6 +9,6 @@ const router = createBrowserRouter(routes);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router}/> {/* sets routes for page and groundwork for app.jsx */}
   </StrictMode>,
 )

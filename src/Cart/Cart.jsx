@@ -8,7 +8,7 @@ export function Cart(){
 
     function removeFromCart(id){
         let remItemQuantity = 0;
-        const newProdArr = products.map(prod =>{
+        const newProdArr = products.map(prod =>{//find product remember its quantity then change it to 0 along with inCart: false
             if(prod.id === id){
                 remItemQuantity = prod.quantity;
                 return {...prod, inCart: false, quantity: 0};

@@ -10,7 +10,7 @@ export function App() {
   return (
     <>
       <Nav totItems={totItems}/>
-      <Outlet context={{setTotItems, products, setProducts}}/>
+      <Outlet context={{setTotItems, products, setProducts}}/> {/* outlet is a hole filled with user selection of route */}
     </>
   )
 }
