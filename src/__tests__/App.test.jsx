@@ -106,7 +106,7 @@ test("select quantity add to cart and check total in nav", async () => {
     const addToCartButons = screen.getAllByRole("button", {name: /add to cart/i});
     await user.click(addToCartButons[0]);
 
-    const cartCount = screen.findByText(/cart\s*1/i);
+    const cartCount = await screen.findByText(/cart\s*1/i);
     expect(cartCount).toBeInTheDocument();
 
     screen.debug();
