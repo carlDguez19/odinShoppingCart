@@ -1,0 +1,52 @@
+import { render, screen } from "@testing-library/react";
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { routes } from "../routes";
+import userEvent from "@testing-library/user-event";
+import { beforeEach } from "vitest";
+
+beforeEach(() => {
+    global.fetch = jest.fn(() => 
+    Promise.resolve({
+        ok: true,
+        json: () =>
+            Promise.resolve([
+                {
+                    id:1,
+                    title: "Test Product",
+                    price: 10,
+                    description: "A test product",
+                    category: "test",
+                    image: "test.jpg",
+                },
+            ]),
+    })
+    );
+});
+
+test("renders the home page by default", () =>{
+    const router = createMemoryRouter(routes, {initialEntries: ["/"],});
+    
+    render(
+        <RouterProvider router={router} />
+    );
+
+    const homeText = screen.getByText(
+        /Welcome to the coolest of online shops with the simplest of home pages!/i
+    );
+
+    expect(homeText).toBeInTheDocument();
+});
+
+test("testing shop link works when clicked", async () => {
+    const router = createMemoryRouter(routes, {initialEntries: ["/"],});
+
+    render(<RouterProvider router={router}/>);
+
+    const user = userEvent.setup();
+
+    const shopLink = screen.getByRole("link", {name: /shop/i});
+    await user.click(shopLink);
+
+    const loadingMessage = await screen.findByText(/products loading... please wait/i);
+    expect(loadingMessage).toBeInTheDocument();
+})
