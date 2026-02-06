@@ -13,7 +13,6 @@ export function Nav({totItems}){
                 </li>
                 <li className={styles.cartNav}>
                     <Link to="/cart"><h2>Cart {totItems}</h2></Link>
-                    {/* <div>{totItems}</div> */}
                 </li>
             </ul>
         </nav>
