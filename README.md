@@ -39,9 +39,7 @@ src/
 │
 ├── App.jsx              \# Layout + shared state provider
 ├── routes.jsx           \# Route configuration
-│
-├── NavBar/
-│   └── NavBar.jsx       \# Navigation + cart count
+├── NavBar.jsx           \# Navigation + cart count
 │
 ├── Home/
 │   └── Home.jsx
