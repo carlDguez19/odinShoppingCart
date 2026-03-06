@@ -7,12 +7,12 @@ import { Cart } from "./Cart/Cart"
 export const routes = [
     {
         path: "/",
-        element: <App/>,
-        errorElement: <ErrorPage/>,
+        element: <App/>,//parent layout component(Nav + Outlet)
+        errorElement: <ErrorPage/>,//Fallback for routing errors
         children: [
             {index: true, element: <Home/>}, //default page loaded as soon as user visits our page
-            {path: "shop", element: <Shop/>},
-            {path: "cart", element: <Cart/>},
+            {path: "shop", element: <Shop/>},//Shop page (Nav + product list)
+            {path: "cart", element: <Cart/>},//Cart page (Nav + items in cart)
         ]
     }
 ]
