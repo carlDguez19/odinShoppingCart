@@ -1,16 +1,136 @@
-# React + Vite
+# React Shopping Cart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple shopping experience built with React, featuring product fetching, cart management, quantity controls, and shared state across routes. This project demonstrates clean component structure, controlled state updates, and a modular approach to UI and logic.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## React Compiler
+The application allows users to browse products, adjust quantities, and manage their cart. It uses React Router’s \`Outlet\` context to share global state between pages, and CSS Modules for scoped styling. Products are fetched from FakeStoreAPI and extended with cart‑related fields.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Product fetching from FakeStoreAPI  
+- Add to Cart and Update Cart functionality  
+- Increment and decrement quantity controls  
+- Global cart state shared across routes  
+- Dynamic cart total displayed in the navigation bar  
+- Remove from Cart support  
+- Loading and error handling for API requests  
+- Modular components with clear responsibilities  
+
+---
+
+## Tech Stack
+
+- React  
+- React Router  
+- CSS Modules  
+- FakeStoreAPI  
+
+---
+
+## Project Structure
+
+\`\`\`txt
+src/
+│
+├── App.jsx              \# Layout + shared state provider
+├── routes.jsx           \# Route configuration
+│
+├── NavBar/
+│   └── NavBar.jsx       \# Navigation + cart count
+│
+├── Home/
+│   └── Home.jsx
+│
+├── Shop/
+│   ├── ShopFetch.jsx    \# Fetch products + add to cart logic
+│   ├── CardGrid.jsx
+│   └── ItemCard.jsx     \# Product card + quantity selector
+│
+├── Cart/
+│   ├── Cart.jsx         \# Cart page
+│   └── CartItem.jsx     \# Quantity controls + remove item
+│
+└── ErrorPage.jsx
+\`\`\`
+
+---
+
+## State Flow
+
+### App.jsx
+
+Holds global state for:
+
+- \`products\`  
+- \`totItems\`  
+
+This state is passed to all pages through \`useOutletContext()\`.
+
+### Shop Page
+
+- Fetches products from the API  
+- Adds \`inCart\` and \`quantity\` fields  
+- Handles adding and updating items in the cart  
+
+### Cart Page
+
+- Filters products where \`inCart\` is true  
+- Allows quantity adjustments  
+- Updates global totals  
+- Supports removing items entirely  
+
+### NavBar
+
+Displays the current total number of items in the cart.
+
+---
+
+## Key Concepts Demonstrated
+
+- Global state sharing without external libraries  
+- Controlled updates using pure functions (\`map\`, \`reduce\`)  
+- Separation of local and global state  
+- Component‑level responsibility and modular design  
+- Error and loading handling for API requests  
+
+---
+
+## API
+
+The project uses FakeStoreAPI:
+
+\`\`\`txt
+https://fakestoreapi.com/products
+\`\`\`
+
+Each product is extended with:
+
+\`\`\`js
+{
+  inCart: false,
+  quantity: 0
+}
+\`\`\`
+
+---
+
+## Running the Project
+
+\`\`\`bash
+npm install
+npm run dev
+\`\`\`
+
+---
+
+## Future Improvements
+
+- Add product categories  
+- Add a checkout page  
+- Persist cart in localStorage  
+- Add animations for cart updates
