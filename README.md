@@ -34,7 +34,7 @@ The application allows users to browse products, adjust quantities, and manage t
 
 ## Project Structure
 
-\`\`\`txt
+`\`\`txt
 src/
 │
 ├── App.jsx              \# Layout + shared state provider
@@ -56,7 +56,7 @@ src/
 │   └── CartItem.jsx     \# Quantity controls + remove item
 │
 └── ErrorPage.jsx
-\`\`\`
+`\`\`
 
 ---
 
@@ -66,20 +66,20 @@ src/
 
 Holds global state for:
 
-- \`products\`  
-- \`totItems\`  
+- `products\`  
+- `totItems\`  
 
 This state is passed to all pages through \`useOutletContext()\`.
 
 ### Shop Page
 
 - Fetches products from the API  
-- Adds \`inCart\` and \`quantity\` fields  
+- Adds `inCart\` and `quantity\` fields  
 - Handles adding and updating items in the cart  
 
 ### Cart Page
 
-- Filters products where \`inCart\` is true  
+- Filters products where `inCart\` is true  
 - Allows quantity adjustments  
 - Updates global totals  
 - Supports removing items entirely  
@@ -93,7 +93,7 @@ Displays the current total number of items in the cart.
 ## Key Concepts Demonstrated
 
 - Global state sharing without external libraries  
-- Controlled updates using pure functions (\`map\`, \`reduce\`)  
+- Controlled updates using pure functions (`map\`, `reduce\`)  
 - Separation of local and global state  
 - Component‑level responsibility and modular design  
 - Error and loading handling for API requests  
@@ -104,27 +104,27 @@ Displays the current total number of items in the cart.
 
 The project uses FakeStoreAPI:
 
-\`\`\`txt
+`\`\`txt
 https://fakestoreapi.com/products
-\`\`\`
+`\`\`
 
 Each product is extended with:
 
-\`\`\`js
+`\`\`js
 {
   inCart: false,
   quantity: 0
 }
-\`\`\`
+`\`\`
 
 ---
 
 ## Running the Project
 
-\`\`\`bash
+`\`\`bash
 npm install
 npm run dev
-\`\`\`
+`\`\`
 
 ---
 
